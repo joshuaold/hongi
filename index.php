@@ -10,6 +10,8 @@
 	$userWidgetsJS = 'var userWidgets = '. json_encode($userWidgets) .'';
 	echo '<script>'. $userWidgetsJS .'</script>';
 	echo '<script>'. $templateDataJS .'</script>';
+
+	echo '<script>var currentWidget;</script>';	
 ?>
 
 <!doctype html>

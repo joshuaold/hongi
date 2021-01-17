@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	initializeRemoveWidgetBtn()
 	initializeAddWidgetBtn()
+	initializeEditWidgetBtn()
 })
 
 function initializeRemoveWidgetBtn() {
@@ -33,7 +34,8 @@ function initializeAddOSMWidget(sectionID) {
 		var idNo = sectionID.replace( /^\D+/g, '')
 		$(`.widgetListModal`).empty()
 		$(`#section${idNo}`).empty().load("widgets/osm-widget.php", function() {
-			initializeRemoveWidgetBtn()
+			initializeEditWidgetBtn()
+			initializeRemoveWidgetBtn()			
 		})
 
 		defaultData = `{
@@ -54,7 +56,7 @@ function initializeAddOSMWidget(sectionID) {
 
 function save() {
 
-	edit()
+	templateData.widgets = userWidgets
 
 	$.ajax({ url: 'dal2.php',
 	         data: {action: 'save', templateData: templateData},
@@ -65,10 +67,34 @@ function save() {
 	})
 }
 
-function edit() {
-	templateData.widgets = userWidgets
+function initializeEditWidgetBtn() {
+	$(".btn-edit-widget").on("click", function() {
+		var sectionID = $(this).parent().attr('id')
+		$(`.editWidgetModal`).load("widgets/components/edit-widget.php", function() {			
+			var widgetIndex = userWidgets.findIndex(x => x.section == sectionID)
+			currentWidget = userWidgets[widgetIndex]
+			$(`#h4`).attr('placeholder', currentWidget.content[0].h4)
+			$(`#p`).attr('placeholder', currentWidget.content[0].p)			
+		})
+	})
 }
 
-function initializeEditWidgetBtn() {
-	
+function acceptChanges() {
+	var h4 = $(`#h4`).val()
+	var p = $(`#p`).val()
+	var sectionID = currentWidget.section
+
+	var widgetIndex = userWidgets.findIndex(x => x.section == sectionID)
+	if(widgetIndex != undefined)
+		userWidgets.splice(widgetIndex, 1)
+
+	currentWidget.content[0].h4 = h4
+	currentWidget.content[0].p = p
+
+	userWidgets.push(currentWidget)
+	save()
+
+	$(`#${sectionID}`).find('h4').text(h4)
+	$(`#${sectionID}`).find('p').text(p)
+	$(`.editWidgetModal`).empty()
 }

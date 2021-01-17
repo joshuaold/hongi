@@ -1,6 +1,6 @@
 <?php 
 
-	include 'components/update-widget.php';
+	include 'components/controls-widget.php';
 	$widgetContent = $sectionWidget->content[0];
 ?>
 
