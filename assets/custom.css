@@ -1,0 +1,8 @@
+.custom-section-hover {
+  position: absolute;
+  width: 1000px;
+  height: 450px;
+  background: red;
+  overflow: hidden;
+  z-index: 10000;
+}
