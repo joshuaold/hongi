@@ -86,8 +86,9 @@
     ?>
 
     <!-- slider Area Start-->
-    <div class="optional-section">
+    <div class="optional-section">        
         <?php include "widgets/slider_widget.php"; ?>
+        <div class="custom-section-hover hidden">&nbsp;</div>
     </div>
     <!-- slider Area End-->
 
