@@ -179,13 +179,13 @@
           arrows: true,
           prevArrow: '<button type="button" class="slick-prev"><i class="ti-angle-left"></i></button>',
           nextArrow: '<button type="button" class="slick-next"><i class="ti-angle-right"></i></button>',
-          slidesToShow: 3,
+          slidesToShow: 1,
           slidesToScroll: 1,
           responsive: [
             {
               breakpoint: 1024,
               settings: {
-                slidesToShow: 3,
+                slidesToShow: 1,
                 slidesToScroll: 1,
                 infinite: true,
                 dots: false,
