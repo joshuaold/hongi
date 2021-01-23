@@ -2,6 +2,8 @@ $(document).ready( () => {
 	initOptionalSections()
 	initAddSection()
 	initRemoveSection()
+	initAddServicesWidget()
+	initRemoveWidget()
 })
 
 function loadSlickSlider(sliderID) {
@@ -55,34 +57,7 @@ function uuidv4() {
   });
 }
 
-function generateEmptySection(sectionID) {
-	// return `
-
-	// 	<div id="section_${uuidv4()}" class="optionalSectionWrapper">
-	//         <div class="categories-area section-padding30 emptySectionArea">
-	//             <div class="container">
-	//                 <div class="row">
-	//                     <div class="col-lg-4 col-md-6 col-sm-6">
-	//                     </div>
-	//                     <div class="col-lg-4 col-md-6 col-sm-6 removeWidgetIcon">
-	//                         <div class="single-cat text-center mb-50">
-	//                             <div class="cat-icon">
-	//                                 <span class="flaticon-result"></span>
-	//                             </div>
-	//                             <div class="cat-cap">
-	//                                 <h5><a href="services.html">Add Widget</a></h5>
-	//                             </div>
-	//                         </div>
-	//                     </div>
-	//                     <div class="col-lg-4 col-md-6 col-sm-6">
-	//                     </div>
-	//                 </div>
-	//             </div>
-	//         </div>
-	//     </div>
-
-	// `
-
+function generateEmptySection(sectionID) {	
 	return `
 		<div id="section_${sectionID}" class="optionalSectionWrapper">
 	        <div class="categories-area section-padding30 testimonial-area emptySectionArea">
@@ -108,7 +83,7 @@ function generateEmptySection(sectionID) {
 	                            </div>
 	                        </div>
 	                    </div>  
-	                    <div class="col-lg-4 col-md-6 col-sm-6 removeWidgetIcon">
+	                    <div class="col-lg-4 col-md-6 col-sm-6 servicesWidgetIcon">
 	                        <div class="single-cat text-center mb-50">
 	                            <div class="cat-icon">
 	                                <span class="flaticon-result"></span>
@@ -155,6 +130,148 @@ function generateEmptySection(sectionID) {
 	`
 }
 
+function generateEmptySectionSlider(sectionID) {	
+	return `
+        <div class="categories-area section-padding30 testimonial-area emptySectionArea">
+            <div class="container">
+                <div class="row h1-testimonial-active" id="${sectionID}">
+                    <div class="col-lg-4 col-md-6 col-sm-6 removeWidgetIcon">
+                        <div class="single-cat text-center mb-50">
+                            <div class="cat-icon">
+                                <span class="flaticon-result"></span>
+                            </div>
+                            <div class="cat-cap">
+                                <h5><a href="services.html">Slider</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 removeWidgetIcon">
+                        <div class="single-cat text-center mb-50">
+                            <div class="cat-icon">
+                                <span class="flaticon-result"></span>
+                            </div>
+                            <div class="cat-cap">
+                                <h5><a href="services.html">Categories</a></h5>
+                            </div>
+                        </div>
+                    </div>  
+                    <div class="col-lg-4 col-md-6 col-sm-6 servicesWidgetIcon">
+                        <div class="single-cat text-center mb-50">
+                            <div class="cat-icon">
+                                <span class="flaticon-result"></span>
+                            </div>
+                            <div class="cat-cap">
+                                <h5><a href="services.html">Services</a></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 removeWidgetIcon">
+                        <div class="single-cat text-center mb-50">
+                            <div class="cat-icon">
+                                <span class="flaticon-result"></span>
+                            </div>
+                            <div class="cat-cap">
+                                <h5><a href="services.html">About</a></h5>
+                            </div>
+                        </div>
+                    </div>  
+                    <div class="col-lg-4 col-md-6 col-sm-6 removeWidgetIcon">
+                        <div class="single-cat text-center mb-50">
+                            <div class="cat-icon">
+                                <span class="flaticon-result"></span>
+                            </div>
+                            <div class="cat-cap">
+                                <h5><a href="services.html">Testimonials</a></h5>
+                            </div>
+                        </div>
+                    </div>  
+                    <div class="col-lg-4 col-md-6 col-sm-6 removeWidgetIcon">
+                        <div class="single-cat text-center mb-50">
+                            <div class="cat-icon">
+                                <span class="flaticon-result"></span>
+                            </div>
+                            <div class="cat-cap">
+                                <h5><a href="services.html">CTA</a></h5>
+                            </div>
+                        </div>
+                    </div>                     
+                </div>
+            </div>
+        </div>
+	`
+}
+
+function generateServicesWidget() {
+
+	return `
+		<div class="optionalSectionContent">
+            <div class="support-company-area pt-100 pb-100 section-bg fix" data-background="assets/img/gallery/section_bg02.jpg">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-6 col-lg-6">
+                            <div class="support-location-img">
+                                <img src="assets/img/gallery/about.png" alt="">
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6">
+                            <div class="right-caption">
+                                <div class="section-tittle section-tittle2 mb-50">
+                                    <span>Our Top Services</span>
+                                    <h2>Our Best Services</h2>
+                                </div>
+                                <div class="support-caption">
+                                    <p class="pera-top">Mollit anim laborum duis adseu dolor iuyn voluptcate velit ess cillum dolore egru lofrre dsu quality mollit anim laborumuis au dolor in voluptate velit cillu.</p>
+                                    <p class="mb-65">Mollit anim laborum.Dvcuis aute serunt  iruxvfg dhjkolohr indd re voluptate velit esscillumlore eu quife nrulla parihatur. Excghcepteur sfwsignjnt occa cupidatat non aute iruxvfg dhjinulpadeserunt moll.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="optionalSectionOverlay overlayBackgroundHide">            
+            <div class="categories-area overlayBackground section-padding30">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-6 editWidgetIcon">
+                            <div class="single-cat text-center mb-50">
+                                <div class="cat-icon">
+                                    <span class="flaticon-development"></span>
+                                </div>
+                                <div class="cat-cap">
+                                    <h5><a href="services.html">Edit Widget</a></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 removeWidgetIcon">
+                            <div class="single-cat text-center mb-50">
+                                <div class="cat-icon">
+                                    <span class="flaticon-result"></span>
+                                </div>
+                                <div class="cat-cap">
+                                    <h5><a href="services.html">Remove Widget</a></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 removeSectionIcon">
+                            <div class="single-cat text-center mb-50">
+                                <div class="cat-icon">
+                                    <span class="flaticon-team"></span>
+                                </div>
+                                <div class="cat-cap">
+                                    <h5><a href="services.html">Remove Section</a></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	`
+}
+
 function initOptionalSections() {	
 	$(".optionalSectionWrapper").hover( function() {
 		let sectionID = $(this).attr("id")
@@ -173,12 +290,40 @@ function initAddSection() {
 		let id = uuidv4()
 		$(`.addSectionArea`).before(generateEmptySection(id))
 		loadSlickSlider(id)
+		initAllWidgets()
 	}) 
 }
 
 function initRemoveSection() {
-	$(`.removeSectionIcon`).on("click", (e) => {
-		let sectionID = $(".removeSectionIcon").closest("div[id]").attr("id")
+	$(`.removeSectionIcon`).on("click", function() {
+		let sectionID = $(this).closest("div[id]").attr("id")
 		$(`#${sectionID}`).remove()
+	})	
+}
+
+function initAllWidgets() {
+	initAddServicesWidget()
+}
+
+function initAddServicesWidget() {
+	$(`.servicesWidgetIcon`).on("click", function() {		
+		let sectionID = $(this).closest("div[id]").attr("id")
+		$(`#section_${sectionID}`).empty().append(generateServicesWidget())
+		$("[data-background]").each(function () {
+	    	$(this).css("background-image", "url(" + $(this).attr("data-background") + ")")
+	    });
+	    initOptionalSections()
+	    initRemoveSection()
+	    initRemoveWidget()
+	})	
+}
+
+function initRemoveWidget() {
+	$(`.removeWidgetIcon`).on("click", function() {		
+		let sectionID = $(this).closest("div[id]").attr("id")
+		let sliderID = sectionID.replace("section_", "")
+		$(`#${sectionID}`).empty().append(generateEmptySectionSlider(sliderID))
+		loadSlickSlider(sliderID)
+		initAllWidgets()
 	})	
 }

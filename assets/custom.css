@@ -47,3 +47,7 @@
 .addSectionArea {
     background-color: rgba(190, 190, 190, 0.1);
 }
+
+.servicesWidgetIcon {
+    cursor: pointer;
+}
