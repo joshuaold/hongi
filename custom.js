@@ -217,7 +217,7 @@ function generateServicesWidget() {
                             <div class="right-caption">
                                 <div class="section-tittle section-tittle2 mb-50">
                                     <span>Our Top Services</span>
-                                    <h2>Our Best Services</h2>
+                                    <h2 id="services-title">Our Best Services</h2>
                                 </div>
                                 <div class="support-caption">
                                     <p class="pera-top">Mollit anim laborum duis adseu dolor iuyn voluptcate velit ess cillum dolore egru lofrre dsu quality mollit anim laborumuis au dolor in voluptate velit cillu.</p>
@@ -307,7 +307,7 @@ function initRemoveSection() {
 		let sectionID = $(this).closest("div[id]").attr("id")
 		$(`#${sectionID}`).remove()
 
-        pageSections = pageSections.filter(pageSections => pageSections.section_id != sectionID)
+        pageData.page_sections = pageSections.filter(pageSections => pageSections.section_id != sectionID)
 	})	
 }
 
@@ -355,9 +355,30 @@ function initRemoveWidget() {
 }
 
 function initEditWidget() {
-    $(`.editWidgetIcon`).on("click", function() {        
-        // $('#myModal').modal('show');
+    $(`.editWidgetIcon`).off().on("click", function() {        
+        let sectionID = $(this).closest("div[id]").attr("id")
+        $(`#modalSectionID`).val(sectionID)
+        $('#myModal').modal('show');
+        initSaveWidgetEdits()
     })    
+}
+
+function initSaveWidgetEdits() {
+    $(`#btnSaveWidgetEdits`).off().on("click", function() {
+        let sectionID = $('#modalSectionID').val()        
+        let currentWidget = pageSections.filter(pageSections => pageSections.section_id == sectionID)[0].section_widget_list[0]
+        let newTitle = $(`.services-title`).val()
+
+        let newWidgetContent = `{
+            "title": "${newTitle}"
+        }`
+
+        currentWidget.widget_content = JSON.parse(newWidgetContent)
+        console.log(JSON.stringify(currentWidget))
+
+        $('#myModal').modal('hide');
+        $(`#${sectionID}`).find('#services-title').text(newTitle)
+    }) 
 }
 
 function showJSONObject() {
