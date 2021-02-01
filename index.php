@@ -44,6 +44,11 @@
                         case "services_widget":
                             $widgetToLoad = "business_template/widgets/services_widget.php";
                             break;
+                        case "testimonial_widget":
+                            $widgetToLoad = "business_template/widgets/testimonial_widget.php";
+                        case "cta_widget":
+                            $widgetToLoad = "business_template/widgets/cta_widget.php";
+                            break;
                         default:
                             break;
                     }

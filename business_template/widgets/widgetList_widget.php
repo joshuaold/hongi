@@ -41,7 +41,7 @@
                     </div>
                 </div>
             </div>  
-            <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="col-lg-4 col-md-6 col-sm-6 testimonialWidgetIcon">
                 <div class="single-cat text-center mb-50">
                     <div class="cat-icon">
                         <span class="flaticon-result"></span>
@@ -51,7 +51,7 @@
                     </div>
                 </div>
             </div>  
-            <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="col-lg-4 col-md-6 col-sm-6 ctaWidgetIcon">
                 <div class="single-cat text-center mb-50">
                     <div class="cat-icon">
                         <span class="flaticon-result"></span>

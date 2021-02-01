@@ -5,8 +5,8 @@
 	      "section_widget_list":[
 	         {
 	            "widget_id":"widget_dcfaa55f170d4168987189cb835cd27e",
-	            "widget_type":"teammembers_widget",
-	            "widget_content":"{\"headline\":\"Headline\",\"title\":\"Title\",\"emphasis\":\"Emphasis\",\"content\":\"Content\"}"
+	            "widget_type":"cta_widget",
+	            "widget_content":"{\"callLineOne\":\"Hello World\",\"callLineTwo\":\"CEO, The World\",\"button\":\"Best company ever!\"}"
 	         }
 	      ]
 	   },

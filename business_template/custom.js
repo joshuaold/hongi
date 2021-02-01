@@ -5,9 +5,13 @@ const sectionMenuOverlay = "sectionMenuOverlay.php"
 const widgetsPath = "widgets"
 const widgetListWidget = "widgetList_widget.php"
 const servicesWidget = "services_widget.php"
+const testimonialWidget = "testimonial_widget.php"
+const ctaWidget = "cta_widget.php"
 
 const modalsPath = "modals"
 const editServicesWidgetModal = "editServicesWidget_modal.php"
+const editTestimonialWidgetModal = "editTestimonialWidget_modal.php"
+const editCtaWidgetModal = "editCtaWidget_modal.php"
 
 $(document).ready( () => {    
     loadAddSection("btnAddSection_main", "section_main_addSection")
@@ -57,6 +61,8 @@ function loadAddSection(btnID, sectionID) {
 
 function loadAvailableWidgets() {
     loadAddServicesWidget()
+    loadAddTestimonialWidget()
+    loadAddCtaWidget()
 }
 
 function loadOverlayFunctions() {
@@ -64,6 +70,63 @@ function loadOverlayFunctions() {
     loadRemoveSection()
     loadRemoveWidget()
     loadEditWidget()
+}
+
+function loadAddCtaWidget() {
+
+    $(`.ctaWidgetIcon`).off().on("click", function() {        
+
+        let id = $(this).closest("div[id]").attr("id").replace("slider_", "")
+        let currentSectionID = `section_${id}`
+        let uuidWidg = generateUUID()
+        let newWidgetID = `widget_${uuidWidg}`
+
+        let contentObj = new Object()
+        contentObj.callLineOne = "Line 1"
+        contentObj.callLineTwo = "Line 2"
+        contentObj.button = "Button"
+
+        let obj = new Object()
+        obj.widget_id = newWidgetID
+        obj.widget_type = "cta_widget"
+        obj.widget_content = JSON.stringify(contentObj)
+
+        let widgetObj = JSON.stringify(obj)
+
+        // let widgetObj = `
+        //         {
+        //             "widget_id": "${newWidgetID}",
+        //             "widget_type": "services_widget",
+        //             "widget_content": {
+        //                 "headline": "Headline",
+        //                 "title": "Title",
+        //                 "emphasis": "Emphasis",
+        //                 "content": "Content"
+        //             }
+        //         }
+        //     `
+
+        pageSections.filter(pageSections => pageSections.section_id == `${currentSectionID}`)[0].section_widget_list.push(JSON.parse(widgetObj))
+        pageData.page_sections = pageSections
+
+        //dom manipulation
+        $.get(`${basePath}/${widgetsPath}/${ctaWidget}`, function(response) {
+            
+            $(`#${currentSectionID}`).empty().append(`<div id="${newWidgetID}"></div>`)
+            $(`#${newWidgetID}`).append(response)
+
+            $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
+                $(`#${newWidgetID}`).after(response)
+                loadOverlayFunctions()
+            })
+
+            $("[data-background]").each(function () {
+                $(this).css("background-image", "url(" + $(this).attr("data-background") + ")")
+            })                        
+
+        })            
+                                     
+    })    
 }
 
 function loadAddServicesWidget() {
@@ -106,6 +169,63 @@ function loadAddServicesWidget() {
 
         //dom manipulation
         $.get(`${basePath}/${widgetsPath}/${servicesWidget}`, function(response) {
+            
+            $(`#${currentSectionID}`).empty().append(`<div id="${newWidgetID}"></div>`)
+            $(`#${newWidgetID}`).append(response)
+
+            $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
+                $(`#${newWidgetID}`).after(response)
+                loadOverlayFunctions()
+            })
+
+            $("[data-background]").each(function () {
+                $(this).css("background-image", "url(" + $(this).attr("data-background") + ")")
+            })                        
+
+        })            
+                                     
+    })    
+}
+
+function loadAddTestimonialWidget() {
+
+    $(`.testimonialWidgetIcon`).off().on("click", function() {        
+
+        let id = $(this).closest("div[id]").attr("id").replace("slider_", "")
+        let currentSectionID = `section_${id}`
+        let uuidWidg = generateUUID()
+        let newWidgetID = `widget_${uuidWidg}`
+
+        let contentObj = new Object()
+        contentObj.name = "Name"
+        contentObj.position = "Position"
+        contentObj.testimonial = "Testimonial"
+
+        let obj = new Object()
+        obj.widget_id = newWidgetID
+        obj.widget_type = "testimonial_widget"
+        obj.widget_content = JSON.stringify(contentObj)
+
+        let widgetObj = JSON.stringify(obj)
+
+        // let widgetObj = `
+        //         {
+        //             "widget_id": "${newWidgetID}",
+        //             "widget_type": "services_widget",
+        //             "widget_content": {
+        //                 "headline": "Headline",
+        //                 "title": "Title",
+        //                 "emphasis": "Emphasis",
+        //                 "content": "Content"
+        //             }
+        //         }
+        //     `
+
+        pageSections.filter(pageSections => pageSections.section_id == `${currentSectionID}`)[0].section_widget_list.push(JSON.parse(widgetObj))
+        pageData.page_sections = pageSections
+
+        //dom manipulation
+        $.get(`${basePath}/${widgetsPath}/${testimonialWidget}`, function(response) {
             
             $(`#${currentSectionID}`).empty().append(`<div id="${newWidgetID}"></div>`)
             $(`#${newWidgetID}`).append(response)
@@ -194,6 +314,19 @@ function loadEditWidget() {
     })    
 }
 
+function getEditWidgetModal(widgetType) {
+    switch(widgetType){
+        case "services_widget":
+            return editServicesWidgetModal
+        case "testimonial_widget":
+            return editTestimonialWidgetModal
+        case "cta_widget":
+            return editCtaWidgetModal
+        default:
+            return null
+    }
+}
+
 function loadSaveWidgetUpdates(widgetType) {
     $(`#btnSaveWidgetEdits`).off().on("click", function() {
         let sectionID = $('#modalSectionID').val()                
@@ -224,7 +357,11 @@ function loadSaveWidgetUpdates(widgetType) {
 function getUpdatedWidgetContent(widgetType) {
     switch(widgetType){
         case "services_widget":
-            return getServicesWidgetUpdates() 
+            return getServicesWidgetUpdates()
+        case "testimonial_widget":
+            return getTestimonialWidgetUpdates() 
+        case "cta_widget":
+            return getCtaWidgetUpdates()    
         default:
             return null
     }
@@ -247,10 +384,44 @@ function getServicesWidgetUpdates() {
     return updatedContent
 }
 
+function getTestimonialWidgetUpdates() {
+
+    let name = $(`#txtName`).val()
+    let position = $(`#txtPosition`).val()
+    let testimonial = $(`#txtaTestimonial`).val()
+
+    let obj = new Object()
+    obj.name = name
+    obj.position = position
+    obj.testimonial = testimonial    
+
+    let updatedContent = JSON.stringify(obj)    
+    return updatedContent
+}
+
+function getCtaWidgetUpdates() {
+
+    let lineOne = $(`#txtLine1`).val()
+    let lineTwo = $(`#txtLine2`).val()
+    let button = $(`#txtButton`).val()
+
+    let obj = new Object()
+    obj.callLineOne = lineOne
+    obj.callLineTwo = lineTwo
+    obj.button = button    
+
+    let updatedContent = JSON.stringify(obj)    
+    return updatedContent
+}
+
 function updateWidgetDisplay(widgetType, sectionID, updatedContent) {
     switch(widgetType){
         case "services_widget":
-            return updateServicesWidgetDisplay(sectionID, updatedContent) 
+            return updateServicesWidgetDisplay(sectionID, updatedContent)
+        case "testimonial_widget":
+            return updateTestimonialWidgetDisplay(sectionID, updatedContent) 
+        case "cta_widget":
+            return updateCtaWidgetDisplay(sectionID, updatedContent) 
         default:
             return null
     }
@@ -264,13 +435,18 @@ function updateServicesWidgetDisplay(sectionID, updatedContent) {
     $(`#${sectionID}`).find('#servicesContent').text(parsedContent.content)
 }
 
-function getEditWidgetModal(widgetType) {
-    switch(widgetType){
-        case "services_widget":
-            return editServicesWidgetModal
-        default:
-            return null
-    }
+function updateTestimonialWidgetDisplay(sectionID, updatedContent) {
+    let parsedContent = JSON.parse(updatedContent)    
+    $(`#${sectionID}`).find('#testimonialName').text(parsedContent.name)
+    $(`#${sectionID}`).find('#testimonialPosition').text(parsedContent.position)
+    $(`#${sectionID}`).find('#testimonialText').text(parsedContent.testimonial)
+}
+
+function updateCtaWidgetDisplay(sectionID, updatedContent) {
+    let parsedContent = JSON.parse(updatedContent)    
+    $(`#${sectionID}`).find('#ctaCallLineOne').text(parsedContent.callLineOne)
+    $(`#${sectionID}`).find('#ctaCallLineTwo').text(parsedContent.callLineTwo)
+    $(`#${sectionID}`).find('#ctaButton').text(parsedContent.button)
 }
 
 function generateUUID() {
@@ -322,23 +498,6 @@ function loadWidgetListSlider(sliderID) {
         ]
     })
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function showJSONObject() {
     // alert(JSON.stringify(pageData))

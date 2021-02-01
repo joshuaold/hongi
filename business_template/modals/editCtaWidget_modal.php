@@ -3,7 +3,7 @@
         <div class="modal-content">
             
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Services Widget</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Cta Widget</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -13,20 +13,16 @@
                 <input hidden id="modalSectionID">
                 <form>
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Headline:</label>
-                        <input type="text" class="form-control" id="txtHeadline">
+                        <label for="recipient-name" class="col-form-label">Line 1:</label>
+                        <input type="text" class="form-control" id="txtLine1">
                     </div>
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Title:</label>
-                        <input type="text" class="form-control" id="txtTitle">
+                        <label for="recipient-name" class="col-form-label">Line 2:</label>
+                        <input type="text" class="form-control" id="txtLine2">
                     </div>
                     <div class="form-group">
-                        <label for="message-text" class="col-form-label">Emphasis Text:</label>
-                        <textarea class="form-control" id="txtaEmphasis"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="message-text" class="col-form-label">Content Text:</label>
-                        <textarea class="form-control" id="txtaContent"></textarea>
+                        <label for="recipient-name" class="col-form-label">Button:</label>
+                        <input type="text" class="form-control" id="txtButton">
                     </div>
                 </form>
             </div>
