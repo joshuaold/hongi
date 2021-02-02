@@ -5,7 +5,7 @@
 	      "section_widget_list":[
 	         {
 	            "widget_id":"widget_dcfaa55f170d4168987189cb835cd27e",
-	            "widget_type":"cta_widget",
+	            "widget_type":"categories_widget",
 	            "widget_content":"{\"callLineOne\":\"Hello World\",\"callLineTwo\":\"CEO, The World\",\"button\":\"Best company ever!\"}"
 	         }
 	      ]

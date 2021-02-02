@@ -7,11 +7,21 @@ const widgetListWidget = "widgetList_widget.php"
 const servicesWidget = "services_widget.php"
 const testimonialWidget = "testimonial_widget.php"
 const ctaWidget = "cta_widget.php"
+const countdownWidget = "countdown_widget.php"
+const teamMembersWidget = "teammembers_widget.php"
+const blogWidget = "blog_widget.php"
+const portfolioWidget = "portfolio_widget.php"
+const categoriesWidget = "categories_widget.php"
 
 const modalsPath = "modals"
 const editServicesWidgetModal = "editServicesWidget_modal.php"
 const editTestimonialWidgetModal = "editTestimonialWidget_modal.php"
 const editCtaWidgetModal = "editCtaWidget_modal.php"
+const editCountdownWidgetModal = "editCountdownWidget_modal.php"
+const editTeamMembersWidgetModal = "editTeamMembersWidget_modal.php"
+const editBlogWidgetModal = "editBlogWidget_modal.php"
+const editPortfolioWidgetModal = "editPortfolioWidget_modal.php"
+const editCategoriesWidgetModal = "editCategoriesWidget_modal.php"
 
 $(document).ready( () => {    
     loadAddSection("btnAddSection_main", "section_main_addSection")
@@ -63,6 +73,11 @@ function loadAvailableWidgets() {
     loadAddServicesWidget()
     loadAddTestimonialWidget()
     loadAddCtaWidget()
+    loadAddCountdownWidget()
+    loadAddTeamMembersWidget()
+    loadAddBlogWidget()
+    loadAddPortfolioWidget()
+    loadAddCategoriesWidget()
 }
 
 function loadOverlayFunctions() {
@@ -70,6 +85,310 @@ function loadOverlayFunctions() {
     loadRemoveSection()
     loadRemoveWidget()
     loadEditWidget()
+}
+
+function loadAddCategoriesWidget() {
+
+    $(`.categoriesWidgetIcon`).off().on("click", function() {        
+
+        let id = $(this).closest("div[id]").attr("id").replace("slider_", "")
+        let currentSectionID = `section_${id}`
+        let uuidWidg = generateUUID()
+        let newWidgetID = `widget_${uuidWidg}`
+
+        let contentObj = new Object()
+        contentObj.headline = "Headline"
+        contentObj.title = "Title"
+        contentObj.tileTitleOne = "Tile Title 1"
+        contentObj.tileDescOne = "Tile Description 1"
+        contentObj.tileTitleTwo = "Tile Title 2"
+        contentObj.tileDescTwo = "Tile Description 2"
+        contentObj.tileTitleThree = "Tile Title 3"
+        contentObj.tileDescThree = "Tile Description 3"        
+
+        let obj = new Object()
+        obj.widget_id = newWidgetID
+        obj.widget_type = "categories_widget"
+        obj.widget_content = JSON.stringify(contentObj)
+
+        let widgetObj = JSON.stringify(obj)
+
+        // let widgetObj = `
+        //         {
+        //             "widget_id": "${newWidgetID}",
+        //             "widget_type": "services_widget",
+        //             "widget_content": {
+        //                 "headline": "Headline",
+        //                 "title": "Title",
+        //                 "emphasis": "Emphasis",
+        //                 "content": "Content"
+        //             }
+        //         }
+        //     `
+
+        pageSections.filter(pageSections => pageSections.section_id == `${currentSectionID}`)[0].section_widget_list.push(JSON.parse(widgetObj))
+        pageData.page_sections = pageSections
+
+        //dom manipulation
+        $.get(`${basePath}/${widgetsPath}/${categoriesWidget}`, function(response) {
+            
+            $(`#${currentSectionID}`).empty().append(`<div id="${newWidgetID}"></div>`)
+            $(`#${newWidgetID}`).append(response)
+
+            $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
+                $(`#${newWidgetID}`).after(response)
+                loadOverlayFunctions()
+            })
+
+            $("[data-background]").each(function () {
+                $(this).css("background-image", "url(" + $(this).attr("data-background") + ")")
+            })                        
+
+        })            
+                                     
+    })    
+}
+
+function loadAddPortfolioWidget() {
+
+    $(`.portfolioWidgetIcon`).off().on("click", function() {        
+
+        let id = $(this).closest("div[id]").attr("id").replace("slider_", "")
+        let currentSectionID = `section_${id}`
+        let uuidWidg = generateUUID()
+        let newWidgetID = `widget_${uuidWidg}`
+
+        let contentObj = new Object()
+        contentObj.headline = "Headline"
+        contentObj.title = "Title"
+        contentObj.bannerHeadOne = "Banner Headline 1"
+        contentObj.bannerTitleOne = "Banner Title 1"
+        contentObj.bannerHeadTwo = "Banner Headline 2"
+        contentObj.bannerTitleTwo = "Banner Title 2"
+
+        let obj = new Object()
+        obj.widget_id = newWidgetID
+        obj.widget_type = "portfolio_widget"
+        obj.widget_content = JSON.stringify(contentObj)
+
+        let widgetObj = JSON.stringify(obj)
+
+        // let widgetObj = `
+        //         {
+        //             "widget_id": "${newWidgetID}",
+        //             "widget_type": "services_widget",
+        //             "widget_content": {
+        //                 "headline": "Headline",
+        //                 "title": "Title",
+        //                 "emphasis": "Emphasis",
+        //                 "content": "Content"
+        //             }
+        //         }
+        //     `
+
+        pageSections.filter(pageSections => pageSections.section_id == `${currentSectionID}`)[0].section_widget_list.push(JSON.parse(widgetObj))
+        pageData.page_sections = pageSections
+
+        //dom manipulation
+        $.get(`${basePath}/${widgetsPath}/${portfolioWidget}`, function(response) {
+            
+            $(`#${currentSectionID}`).empty().append(`<div id="${newWidgetID}"></div>`)
+            $(`#${newWidgetID}`).append(response)
+
+            $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
+                $(`#${newWidgetID}`).after(response)
+                loadOverlayFunctions()
+            })
+
+            $("[data-background]").each(function () {
+                $(this).css("background-image", "url(" + $(this).attr("data-background") + ")")
+            })                        
+
+        })            
+                                     
+    })    
+}
+
+function loadAddBlogWidget() {
+
+    $(`.blogWidgetIcon`).off().on("click", function() {        
+
+        let id = $(this).closest("div[id]").attr("id").replace("slider_", "")
+        let currentSectionID = `section_${id}`
+        let uuidWidg = generateUUID()
+        let newWidgetID = `widget_${uuidWidg}`
+
+        let contentObj = new Object()
+        contentObj.headline = "Headline"
+        contentObj.title = "Title"
+        contentObj.authorOne = "Author"
+        contentObj.titleOne = "Title"
+        contentObj.contentOne = "Content"
+        contentObj.authorTwo = "Author"
+        contentObj.titleTwo = "Title"
+        contentObj.contentTwo = "Content"
+
+        let obj = new Object()
+        obj.widget_id = newWidgetID
+        obj.widget_type = "blog_widget"
+        obj.widget_content = JSON.stringify(contentObj)
+
+        let widgetObj = JSON.stringify(obj)
+
+        // let widgetObj = `
+        //         {
+        //             "widget_id": "${newWidgetID}",
+        //             "widget_type": "services_widget",
+        //             "widget_content": {
+        //                 "headline": "Headline",
+        //                 "title": "Title",
+        //                 "emphasis": "Emphasis",
+        //                 "content": "Content"
+        //             }
+        //         }
+        //     `
+
+        pageSections.filter(pageSections => pageSections.section_id == `${currentSectionID}`)[0].section_widget_list.push(JSON.parse(widgetObj))
+        pageData.page_sections = pageSections
+
+        //dom manipulation
+        $.get(`${basePath}/${widgetsPath}/${blogWidget}`, function(response) {
+            
+            $(`#${currentSectionID}`).empty().append(`<div id="${newWidgetID}"></div>`)
+            $(`#${newWidgetID}`).append(response)
+
+            $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
+                $(`#${newWidgetID}`).after(response)
+                loadOverlayFunctions()
+            })
+
+            $("[data-background]").each(function () {
+                $(this).css("background-image", "url(" + $(this).attr("data-background") + ")")
+            })                        
+
+        })            
+                                     
+    })    
+}
+
+function loadAddTeamMembersWidget() {
+
+    $(`.teamMembersWidgetIcon`).off().on("click", function() {        
+
+        let id = $(this).closest("div[id]").attr("id").replace("slider_", "")
+        let currentSectionID = `section_${id}`
+        let uuidWidg = generateUUID()
+        let newWidgetID = `widget_${uuidWidg}`
+
+        let contentObj = new Object()
+        contentObj.headline = "Headline"
+        contentObj.title = "Title"
+        contentObj.memberOne = "Name"
+        contentObj.roleOne = "Role"
+
+        let obj = new Object()
+        obj.widget_id = newWidgetID
+        obj.widget_type = "teammembers_widget"
+        obj.widget_content = JSON.stringify(contentObj)
+
+        let widgetObj = JSON.stringify(obj)
+
+        // let widgetObj = `
+        //         {
+        //             "widget_id": "${newWidgetID}",
+        //             "widget_type": "services_widget",
+        //             "widget_content": {
+        //                 "headline": "Headline",
+        //                 "title": "Title",
+        //                 "emphasis": "Emphasis",
+        //                 "content": "Content"
+        //             }
+        //         }
+        //     `
+
+        pageSections.filter(pageSections => pageSections.section_id == `${currentSectionID}`)[0].section_widget_list.push(JSON.parse(widgetObj))
+        pageData.page_sections = pageSections
+
+        //dom manipulation
+        $.get(`${basePath}/${widgetsPath}/${teamMembersWidget}`, function(response) {
+            
+            $(`#${currentSectionID}`).empty().append(`<div id="${newWidgetID}"></div>`)
+            $(`#${newWidgetID}`).append(response)
+
+            $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
+                $(`#${newWidgetID}`).after(response)
+                loadOverlayFunctions()
+            })
+
+            $("[data-background]").each(function () {
+                $(this).css("background-image", "url(" + $(this).attr("data-background") + ")")
+            })                        
+
+        })            
+                                     
+    })    
+}
+
+function loadAddCountdownWidget() {
+
+    $(`.countdownWidgetIcon`).off().on("click", function() {        
+
+        let id = $(this).closest("div[id]").attr("id").replace("slider_", "")
+        let currentSectionID = `section_${id}`
+        let uuidWidg = generateUUID()
+        let newWidgetID = `widget_${uuidWidg}`
+
+        let contentObj = new Object()
+        contentObj.numberOne = "1"
+        contentObj.textOne = "Text 1"
+        contentObj.numberTwo = "2"
+        contentObj.textTwo = "Text 2"
+        contentObj.numberThree = "3"
+        contentObj.textThree = "Text 3"
+        contentObj.numberFour = "4"
+        contentObj.textFour = "Text 4"
+
+        let obj = new Object()
+        obj.widget_id = newWidgetID
+        obj.widget_type = "countdown_widget"
+        obj.widget_content = JSON.stringify(contentObj)
+
+        let widgetObj = JSON.stringify(obj)
+
+        // let widgetObj = `
+        //         {
+        //             "widget_id": "${newWidgetID}",
+        //             "widget_type": "services_widget",
+        //             "widget_content": {
+        //                 "headline": "Headline",
+        //                 "title": "Title",
+        //                 "emphasis": "Emphasis",
+        //                 "content": "Content"
+        //             }
+        //         }
+        //     `
+
+        pageSections.filter(pageSections => pageSections.section_id == `${currentSectionID}`)[0].section_widget_list.push(JSON.parse(widgetObj))
+        pageData.page_sections = pageSections
+
+        //dom manipulation
+        $.get(`${basePath}/${widgetsPath}/${countdownWidget}`, function(response) {
+            
+            $(`#${currentSectionID}`).empty().append(`<div id="${newWidgetID}"></div>`)
+            $(`#${newWidgetID}`).append(response)
+
+            $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
+                $(`#${newWidgetID}`).after(response)
+                loadOverlayFunctions()
+            })
+
+            $("[data-background]").each(function () {
+                $(this).css("background-image", "url(" + $(this).attr("data-background") + ")")
+            })                        
+
+        })            
+                                     
+    })    
 }
 
 function loadAddCtaWidget() {
@@ -322,6 +641,16 @@ function getEditWidgetModal(widgetType) {
             return editTestimonialWidgetModal
         case "cta_widget":
             return editCtaWidgetModal
+        case "countdown_widget":
+            return editCountdownWidgetModal
+        case "teammembers_widget":
+            return editTeamMembersWidgetModal
+        case "blog_widget":
+            return editBlogWidgetModal
+        case "portfolio_widget":
+            return editPortfolioWidgetModal
+        case "categories_widget":
+            return editCategoriesWidgetModal
         default:
             return null
     }
@@ -362,9 +691,132 @@ function getUpdatedWidgetContent(widgetType) {
             return getTestimonialWidgetUpdates() 
         case "cta_widget":
             return getCtaWidgetUpdates()    
+        case "countdown_widget":
+            return getCountdownWidgetUpdates()
+        case "teammembers_widget":
+            return getTeamMembersWidgetUpdates()
+        case "blog_widget":
+            return getBlogWidgetUpdates()
+        case "portfolio_widget":
+            return getPortfolioWidgetUpdates()
+        case "categories_widget":
+            return getCategoriesWidgetUpdates()
         default:
             return null
     }
+}
+
+function getCategoriesWidgetUpdates() {
+
+    let headline = $(`#txtCatHeadline`).val()
+    let title = $(`#txtCatTitle`).val()
+    let tileTitleOne = $(`#txtCatTileTitle1`).val()
+    let tileDescOne = $(`#txtCatTileDesc1`).val()
+    let tileTitleTwo = $(`#txtCatTileTitle2`).val()
+    let tileDescTwo = $(`#txtCatTileDesc2`).val()    
+    let tileTitleThree = $(`#txtCatTileTitle3`).val()
+    let tileDescThree = $(`#txtCatTileDesc3`).val()    
+
+    let obj = new Object()
+    obj.headline = headline
+    obj.title = title
+    obj.tileTitleOne = tileTitleOne
+    obj.tileDescOne = tileDescOne
+    obj.tileTitleTwo = tileTitleTwo
+    obj.tileDescTwo = tileDescTwo
+    obj.tileTitleThree = tileTitleThree
+    obj.tileDescThree = tileDescThree    
+
+    let updatedContent = JSON.stringify(obj)    
+    return updatedContent
+}
+
+function getPortfolioWidgetUpdates() {
+
+    let headline = $(`#txtPortfolioHeadline`).val()
+    let title = $(`#txtPortfolioTitle`).val()
+    let bannerHeadOne = $(`#txtPortfolioBanHead1`).val()
+    let bannerTitleOne = $(`#txtPortfolioBanTitle1`).val()
+    let bannerHeadTwo = $(`#txtPortfolioBanHead2`).val()
+    let bannerTitleTwo = $(`#txtPortfolioBanTitle2`).val()    
+
+    let obj = new Object()
+    obj.headline = headline
+    obj.title = title
+    obj.bannerHeadOne = bannerHeadOne
+    obj.bannerTitleOne = bannerTitleOne
+    obj.bannerHeadTwo = bannerHeadTwo
+    obj.bannerTitleTwo = bannerTitleTwo
+
+    let updatedContent = JSON.stringify(obj)    
+    return updatedContent
+}
+
+function getBlogWidgetUpdates() {
+
+    let headline = $(`#txtBlogHeadline`).val()
+    let title = $(`#txtBlogTitle`).val()
+    let authorOne = $(`#txtBlogAuthor1`).val()
+    let titleOne = $(`#txtBlogTitle1`).val()
+    let contentOne = $(`#txtBlogContent1`).val()
+    let authorTwo = $(`#txtBlogAuthor2`).val()
+    let titleTwo = $(`#txtBlogTitle2`).val()
+    let contentTwo = $(`#txtBlogContent2`).val()
+
+    let obj = new Object()
+    obj.headline = headline
+    obj.title = title
+    obj.authorOne = authorOne
+    obj.titleOne = titleOne
+    obj.contentOne = contentOne
+    obj.authorTwo = authorTwo
+    obj.titleTwo = titleTwo
+    obj.contentTwo = contentTwo
+
+    let updatedContent = JSON.stringify(obj)    
+    return updatedContent
+}
+
+function getTeamMembersWidgetUpdates() {
+
+    let headline = $(`#txtHeadline`).val()
+    let title = $(`#txtTitle`).val()
+    let name = $(`#txtName`).val()
+    let role = $(`#txtRole`).val()
+
+    let obj = new Object()
+    obj.headline = headline
+    obj.title = title
+    obj.memberOne = name
+    obj.roleOne = role
+
+    let updatedContent = JSON.stringify(obj)    
+    return updatedContent
+}
+
+function getCountdownWidgetUpdates() {
+
+    let num1 = $(`#txtNum1`).val()
+    let text1 = $(`#txtText1`).val()
+    let num2 = $(`#txtNum2`).val()
+    let text2 = $(`#txtText2`).val()
+    let num3 = $(`#txtNum3`).val()
+    let text3 = $(`#txtText3`).val()
+    let num4 = $(`#txtNum4`).val()
+    let text4 = $(`#txtText4`).val()
+
+    let obj = new Object()
+    obj.numberOne = num1
+    obj.textOne = text1
+    obj.numberTwo = num2
+    obj.textTwo = text2
+    obj.numberThree = num3
+    obj.textThree = text3
+    obj.numberFour = num4
+    obj.textFour = text4
+
+    let updatedContent = JSON.stringify(obj)    
+    return updatedContent
 }
 
 function getServicesWidgetUpdates() {
@@ -419,12 +871,76 @@ function updateWidgetDisplay(widgetType, sectionID, updatedContent) {
         case "services_widget":
             return updateServicesWidgetDisplay(sectionID, updatedContent)
         case "testimonial_widget":
-            return updateTestimonialWidgetDisplay(sectionID, updatedContent) 
+            return updateTestimonialWidgetDisplay(sectionID, updatedContent)
         case "cta_widget":
-            return updateCtaWidgetDisplay(sectionID, updatedContent) 
+            return updateCtaWidgetDisplay(sectionID, updatedContent)
+        case "countdown_widget":
+            return updateCountdownWidgetDisplay(sectionID, updatedContent)
+        case "teammembers_widget":
+            return updateTeamMembersWidgetDisplay(sectionID, updatedContent)
+        case "blog_widget":
+            return updateBlogWidgetDisplay(sectionID, updatedContent)
+        case "portfolio_widget":
+            return updatePortfolioWidgetDisplay(sectionID, updatedContent)
+        case "categories_widget":
+            return updateCategoriesWidgetDisplay(sectionID, updatedContent)
         default:
             return null
     }
+}
+
+function updateCategoriesWidgetDisplay(sectionID, updatedContent) {
+    let parsedContent = JSON.parse(updatedContent)
+    $(`#${sectionID}`).find('#categoriesHeadline').text(parsedContent.headline)
+    $(`#${sectionID}`).find('#categoriesTitle').text(parsedContent.title)
+    $(`#${sectionID}`).find('#categoriesTileTitle1').text(parsedContent.tileTitleOne)
+    $(`#${sectionID}`).find('#categoriesTileDesc1').text(parsedContent.tileDescOne)
+    $(`#${sectionID}`).find('#categoriesTileTitle2').text(parsedContent.tileTitleTwo)
+    $(`#${sectionID}`).find('#categoriesTileDesc2').text(parsedContent.tileDescTwo)    
+    $(`#${sectionID}`).find('#categoriesTileTitle3').text(parsedContent.tileTitleThree)
+    $(`#${sectionID}`).find('#categoriesTileDesc3').text(parsedContent.tileDescThree)
+}
+
+function updatePortfolioWidgetDisplay(sectionID, updatedContent) {
+    let parsedContent = JSON.parse(updatedContent)
+    $(`#${sectionID}`).find('#portfolioHeadline').text(parsedContent.headline)
+    $(`#${sectionID}`).find('#portfolioTitle').text(parsedContent.title)
+    $(`#${sectionID}`).find('#portfolioBanHead1').text(parsedContent.bannerHeadOne)
+    $(`#${sectionID}`).find('#portfolioBanTitle1').text(parsedContent.bannerTitleOne)
+    $(`#${sectionID}`).find('#portfolioBanHead2').text(parsedContent.bannerHeadTwo)
+    $(`#${sectionID}`).find('#portfolioBanTitle2').text(parsedContent.bannerTitleTwo)    
+}
+
+function updateBlogWidgetDisplay(sectionID, updatedContent) {
+    let parsedContent = JSON.parse(updatedContent)
+    $(`#${sectionID}`).find('#blogHeadline').text(parsedContent.headline)
+    $(`#${sectionID}`).find('#blogTitle').text(parsedContent.title)
+    $(`#${sectionID}`).find('#blogAuthor1').text(parsedContent.authorOne)
+    $(`#${sectionID}`).find('#blogTitle1').text(parsedContent.titleOne)
+    $(`#${sectionID}`).find('#blogContent1').text(parsedContent.contentOne)
+    $(`#${sectionID}`).find('#blogAuthor2').text(parsedContent.authorTwo)
+    $(`#${sectionID}`).find('#blogTitle2').text(parsedContent.titleTwo)
+    $(`#${sectionID}`).find('#blogContent2').text(parsedContent.contentTwo)
+}
+
+function updateTeamMembersWidgetDisplay(sectionID, updatedContent) {
+    let parsedContent = JSON.parse(updatedContent)
+    $(`#${sectionID}`).find('#teamHeadline').text(parsedContent.headline)
+    $(`#${sectionID}`).find('#teamTitle').text(parsedContent.title)
+    $(`#${sectionID}`).find('#teamMember1Name').text(parsedContent.memberOne)
+    $(`#${sectionID}`).find('#teamMember1Role').text(parsedContent.roleOne)
+}
+
+function updateCountdownWidgetDisplay(sectionID, updatedContent) {
+    let parsedContent = JSON.parse(updatedContent)
+    $(`#${sectionID}`).find('#box1Num').text(parsedContent.numberOne)
+    $(`#${sectionID}`).find('#box1Text').text(parsedContent.textOne)
+    $(`#${sectionID}`).find('#box2Num').text(parsedContent.numberTwo)
+    $(`#${sectionID}`).find('#box2Text').text(parsedContent.textTwo)
+    $(`#${sectionID}`).find('#box3Num').text(parsedContent.numberThree)
+    $(`#${sectionID}`).find('#box3Text').text(parsedContent.textThree)
+    $(`#${sectionID}`).find('#box4Num').text(parsedContent.numberFour)
+    $(`#${sectionID}`).find('#box4Text').text(parsedContent.textFour)
 }
 
 function updateServicesWidgetDisplay(sectionID, updatedContent) {

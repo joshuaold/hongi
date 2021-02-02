@@ -48,7 +48,16 @@
                             $widgetToLoad = "business_template/widgets/testimonial_widget.php";
                         case "cta_widget":
                             $widgetToLoad = "business_template/widgets/cta_widget.php";
-                            break;
+                        case "countdown_widget":
+                            $widgetToLoad = "business_template/widgets/countdown_widget.php";
+                        case "teammembers_widget":
+                            $widgetToLoad = "business_template/widgets/teammembers_widget.php";
+                        case "blog_widget":
+                            $widgetToLoad = "business_template/widgets/blog_widget.php";
+                        case "portfolio_widget":
+                            $widgetToLoad = "business_template/widgets/portfolio_widget.php";
+                        case "categories_widget":
+                            $widgetToLoad = "business_template/widgets/categories_widget.php";
                         default:
                             break;
                     }
