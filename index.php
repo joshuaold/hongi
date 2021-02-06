@@ -24,9 +24,12 @@
 
         <div id="section_header">
             <header>
-            <!-- Header Start -->
-            
-            <!-- Header End -->
+                <div class="header-area">
+                    <div class="main-header ">
+                        <?php include "business_template/widgets/sociallinks_widget.php"; ?>
+                        <?php include "business_template/widgets/navbar_widget.php"; ?>
+                    </div>
+                </div>
             </header>
         </div>    
 
@@ -58,6 +61,8 @@
                             $widgetToLoad = "business_template/widgets/portfolio_widget.php";
                         case "categories_widget":
                             $widgetToLoad = "business_template/widgets/categories_widget.php";
+                        case "slider_widget":
+                            $widgetToLoad = "business_template/widgets/slider_widget.php";
                         default:
                             break;
                     }

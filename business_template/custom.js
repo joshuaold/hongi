@@ -12,6 +12,7 @@ const teamMembersWidget = "teammembers_widget.php"
 const blogWidget = "blog_widget.php"
 const portfolioWidget = "portfolio_widget.php"
 const categoriesWidget = "categories_widget.php"
+const sliderWidget = "slider_widget.php"
 
 const modalsPath = "modals"
 const editServicesWidgetModal = "editServicesWidget_modal.php"
@@ -22,11 +23,31 @@ const editTeamMembersWidgetModal = "editTeamMembersWidget_modal.php"
 const editBlogWidgetModal = "editBlogWidget_modal.php"
 const editPortfolioWidgetModal = "editPortfolioWidget_modal.php"
 const editCategoriesWidgetModal = "editCategoriesWidget_modal.php"
+const editSliderWidgetModal = "editSliderWidget_modal.php"
 
 $(document).ready( () => {    
     loadAddSection("btnAddSection_main", "section_main_addSection")
     loadOverlayFunctions()
 })
+
+function loadAvailableWidgets() {
+    loadAddServicesWidget()
+    loadAddTestimonialWidget()
+    loadAddCtaWidget()
+    loadAddCountdownWidget()
+    loadAddTeamMembersWidget()
+    loadAddBlogWidget()
+    loadAddPortfolioWidget()
+    loadAddCategoriesWidget()
+    loadAddSliderWidget()
+}
+
+function loadOverlayFunctions() {
+    loadSectionMenuOverlay()
+    loadRemoveSection()
+    loadRemoveWidget()
+    loadEditWidget()
+}
 
 function loadAddSection(btnID, sectionID) {
     $(`#${btnID}`).on("click", (e) => {
@@ -69,22 +90,67 @@ function loadAddSection(btnID, sectionID) {
     }) 
 }
 
-function loadAvailableWidgets() {
-    loadAddServicesWidget()
-    loadAddTestimonialWidget()
-    loadAddCtaWidget()
-    loadAddCountdownWidget()
-    loadAddTeamMembersWidget()
-    loadAddBlogWidget()
-    loadAddPortfolioWidget()
-    loadAddCategoriesWidget()
-}
+function loadAddSliderWidget() {
 
-function loadOverlayFunctions() {
-    loadSectionMenuOverlay()
-    loadRemoveSection()
-    loadRemoveWidget()
-    loadEditWidget()
+    $(`.sliderWidgetIcon`).off().on("click", function() {        
+
+        let id = $(this).closest("div[id]").attr("id").replace("slider_", "")
+        let currentSectionID = `section_${id}`
+        let uuidWidg = generateUUID()
+        let newWidgetID = `widget_${uuidWidg}`
+        let newSliderID = `slider_${currentSectionID.replace("section_", "")}`
+
+        let contentObj = new Object()
+        contentObj.headline = "Headline"
+        contentObj.title = "Title"
+        contentObj.content = "Content"
+        contentObj.button = "Button"
+
+        let obj = new Object()
+        obj.widget_id = newWidgetID
+        obj.widget_type = "slider_widget"
+        obj.widget_content = JSON.stringify(contentObj)
+
+        let widgetObj = JSON.stringify(obj)
+
+        // let widgetObj = `
+        //         {
+        //             "widget_id": "${newWidgetID}",
+        //             "widget_type": "services_widget",
+        //             "widget_content": {
+        //                 "headline": "Headline",
+        //                 "title": "Title",
+        //                 "emphasis": "Emphasis",
+        //                 "content": "Content"
+        //             }
+        //         }
+        //     `
+
+        pageSections.filter(pageSections => pageSections.section_id == `${currentSectionID}`)[0].section_widget_list.push(JSON.parse(widgetObj))
+        pageData.page_sections = pageSections
+
+        //dom manipulation
+        $.get(`${basePath}/${widgetsPath}/${sliderWidget}`, function(response) {
+            
+            $(`#${currentSectionID}`).empty().append(`<div id="${newWidgetID}"></div>`)
+
+            response = response.replace("replaceWithSliderID", newSliderID)
+            $(`#${newWidgetID}`).append(response)
+            
+            loadSliderSlider(newSliderID)            
+
+            $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
+                $(`#${newWidgetID}`).after(response)
+                loadOverlayFunctions()
+            })
+
+            $("[data-background]").each(function () {
+                $(this).css("background-image", "url(" + $(this).attr("data-background") + ")")
+            })                               
+
+        })            
+                                     
+    })    
 }
 
 function loadAddCategoriesWidget() {
@@ -651,6 +717,8 @@ function getEditWidgetModal(widgetType) {
             return editPortfolioWidgetModal
         case "categories_widget":
             return editCategoriesWidgetModal
+        case "slider_widget":
+            return editSliderWidgetModal
         default:
             return null
     }
@@ -701,9 +769,28 @@ function getUpdatedWidgetContent(widgetType) {
             return getPortfolioWidgetUpdates()
         case "categories_widget":
             return getCategoriesWidgetUpdates()
+        case "slider_widget":
+            return getSliderWidgetUpdates()
         default:
             return null
     }
+}
+
+function getSliderWidgetUpdates() {
+
+    let headline = $(`#txtSliderHeadline`).val()
+    let title = $(`#txtSliderTitle`).val()
+    let button = $(`#txtSliderButton`).val()    
+    let content = $(`#txtaSliderContent`).val()    
+
+    let obj = new Object()
+    obj.headline = headline
+    obj.title = title
+    obj.content = content
+    obj.button = button
+
+    let updatedContent = JSON.stringify(obj)    
+    return updatedContent
 }
 
 function getCategoriesWidgetUpdates() {
@@ -884,9 +971,19 @@ function updateWidgetDisplay(widgetType, sectionID, updatedContent) {
             return updatePortfolioWidgetDisplay(sectionID, updatedContent)
         case "categories_widget":
             return updateCategoriesWidgetDisplay(sectionID, updatedContent)
+        case "slider_widget":
+            return updateSliderWidgetDisplay(sectionID, updatedContent)
         default:
             return null
     }
+}
+
+function updateSliderWidgetDisplay(sectionID, updatedContent) {
+    let parsedContent = JSON.parse(updatedContent)
+    $(`#${sectionID}`).find('#sliderHeadline').text(parsedContent.headline)
+    $(`#${sectionID}`).find('#sliderTitle').text(parsedContent.title)
+    $(`#${sectionID}`).find('#sliderContent').text(parsedContent.content)
+    $(`#${sectionID}`).find('#sliderButton').text(parsedContent.button) 
 }
 
 function updateCategoriesWidgetDisplay(sectionID, updatedContent) {
@@ -1014,6 +1111,78 @@ function loadWidgetListSlider(sliderID) {
         ]
     })
 }
+
+function loadSliderSlider(sliderID) {    
+
+    $(`#${sliderID}`).on('init', function (e, slick) {
+        var $firstAnimatingElements = $('.single-slider:first-child').find('[data-animation]');
+        doAnimations($firstAnimatingElements);
+    });
+
+    $(`#${sliderID}`).on('beforeChange', function (e, slick, currentSlide, nextSlide) {
+        var $animatingElements = $('.single-slider[data-slick-index="' + nextSlide + '"]').find('[data-animation]');
+        doAnimations($animatingElements);
+    });
+
+    $(`#${sliderID}`).slick({
+        autoplay: false,
+        autoplaySpeed: 10000,
+        dots: false,
+        fade: true,
+        arrows: true,
+        prevArrow: '<button type="button" class="slick-prev"><i class="ti-arrow-left"></i></button>',
+        nextArrow: '<button type="button" class="slick-next"><i class="ti-arrow-right"></i></button>',
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    infinite: true,
+                }
+            },
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false
+                }
+            },
+            {
+                breakpoint: 767,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false
+                }
+            }
+        ]
+    });
+
+    function doAnimations(elements) {
+        var animationEndEvents = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+        elements.each(function () {
+
+            var $this = $(this);
+            var $animationDelay = $this.data('delay');
+            var $animationType = 'animated ' + $this.data('animation');
+
+            $this.css({
+                'animation-delay': $animationDelay,
+                '-webkit-animation-delay': $animationDelay
+            });
+
+            $this.addClass($animationType).one(animationEndEvents, function () {
+                $this.removeClass($animationType);
+            });
+
+        });
+    }
+
+    // mainSlider()
+}
+    
 
 function showJSONObject() {
     // alert(JSON.stringify(pageData))
