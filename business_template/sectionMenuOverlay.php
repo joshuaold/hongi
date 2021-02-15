@@ -1,6 +1,9 @@
-<div class="optionalSectionOverlay overlayBackgroundHide">            
+<div class="optionalSectionOverlay overlayBackgroundShow">            
     <div class="categories-area overlayBackground section-padding30">
         <div class="container">
+            <div class="hero__btn" data-animation="fadeInLeft" data-delay="1.1s">
+                <a class="btn hero-btn cancelEditSectionBtn">CANCEL</a>
+            </div>
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-6 editWidgetIcon">
                     <div class="single-cat text-center mb-50">

@@ -70,10 +70,11 @@
                 ?>
 
                 <div id="<?php echo $sectionID; ?>" class="optionalSectionWrapper">
+                    <?php include "business_template/editSectionOverlay.php"; ?>
                     <div id="<?php echo $widgetID; ?>">
                         <?php include $widgetToLoad; ?>
                     </div>
-                    <?php include "business_template/sectionMenuOverlay.php"; ?>
+                    <!-- <?php include "business_template/sectionMenuOverlay.php"; ?> -->                    
                 </div>
 
                 <?php } ?>

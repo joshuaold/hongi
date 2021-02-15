@@ -27,6 +27,7 @@
 
 $(document).ready( () => {    
     loadAddSection("btnAddSection_main", "section_main_addSection")
+    loadEditSection()
     loadOverlayFunctions()
 })
 

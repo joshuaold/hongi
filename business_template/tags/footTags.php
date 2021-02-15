@@ -37,7 +37,8 @@
 <script src="./business_template/assets/js/main.js"></script>
 <script src="./business_template/assets/custom/constants.js"></script>
 <script src="./business_template/assets/custom/common.js"></script>
+<script src="./business_template/assets/custom/editSectionOverlay.js"></script>
 <script src="./business_template/assets/custom/addWidgets.js"></script>
 <script src="./business_template/assets/custom/editWidgets.js"></script>
-<script src="./business_template/assets/custom/editSectionOverlay.js"></script>
+<script src="./business_template/assets/custom/sectionMenuOverlay.js"></script>
 <script src="./business_template/assets/custom/custom.js"></script>
