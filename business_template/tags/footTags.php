@@ -35,4 +35,9 @@
 <!-- Jquery Plugins, main Jquery -->	
 <script src="./business_template/assets/js/plugins.js"></script>
 <script src="./business_template/assets/js/main.js"></script>
-<script src="./business_template/custom.js"></script>
+<script src="./business_template/assets/custom/constants.js"></script>
+<script src="./business_template/assets/custom/common.js"></script>
+<script src="./business_template/assets/custom/addWidgets.js"></script>
+<script src="./business_template/assets/custom/editWidgets.js"></script>
+<script src="./business_template/assets/custom/editSectionOverlay.js"></script>
+<script src="./business_template/assets/custom/custom.js"></script>

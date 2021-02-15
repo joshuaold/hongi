@@ -18,4 +18,4 @@
 <link rel="stylesheet" href="business_template/assets/css/slick.css">
 <link rel="stylesheet" href="business_template/assets/css/nice-select.css">
 <link rel="stylesheet" href="business_template/assets/css/style.css">
-<link rel="stylesheet" href="business_template/assets/custom.css">
+<link rel="stylesheet" href="business_template/assets/custom/custom.css">
