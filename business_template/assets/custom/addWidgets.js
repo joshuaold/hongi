@@ -102,9 +102,15 @@ function loadAddCategoriesWidget() {
             $(`#${currentSectionID}`).empty().append(`<div id="${newWidgetID}"></div>`)
             $(`#${newWidgetID}`).append(response)
 
-            $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
-                $(`#${newWidgetID}`).after(response)
-                loadOverlayFunctions()
+            // $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
+            //     $(`#${newWidgetID}`).after(response)
+            //     loadOverlayFunctions()
+            // })
+
+            $.get(`${basePath}/${editSectionOverlay}`, function(response) {
+                $(`#${newWidgetID}`).before(response)
+                loadSectionMenuOverlay()
+                loadEditSection()
             })
 
             $("[data-background]").each(function () {
@@ -149,9 +155,15 @@ function loadAddPortfolioWidget() {
             $(`#${currentSectionID}`).empty().append(`<div id="${newWidgetID}"></div>`)
             $(`#${newWidgetID}`).append(response)
 
-            $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
-                $(`#${newWidgetID}`).after(response)
-                loadOverlayFunctions()
+            // $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
+            //     $(`#${newWidgetID}`).after(response)
+            //     loadOverlayFunctions()
+            // })
+
+            $.get(`${basePath}/${editSectionOverlay}`, function(response) {
+                $(`#${newWidgetID}`).before(response)
+                loadSectionMenuOverlay()
+                loadEditSection()
             })
 
             $("[data-background]").each(function () {
@@ -198,9 +210,15 @@ function loadAddBlogWidget() {
             $(`#${currentSectionID}`).empty().append(`<div id="${newWidgetID}"></div>`)
             $(`#${newWidgetID}`).append(response)
 
-            $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
-                $(`#${newWidgetID}`).after(response)
-                loadOverlayFunctions()
+            // $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
+            //     $(`#${newWidgetID}`).after(response)
+            //     loadOverlayFunctions()
+            // })
+
+            $.get(`${basePath}/${editSectionOverlay}`, function(response) {
+                $(`#${newWidgetID}`).before(response)
+                loadSectionMenuOverlay()
+                loadEditSection()
             })
 
             $("[data-background]").each(function () {
@@ -243,9 +261,15 @@ function loadAddTeamMembersWidget() {
             $(`#${currentSectionID}`).empty().append(`<div id="${newWidgetID}"></div>`)
             $(`#${newWidgetID}`).append(response)
 
-            $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
-                $(`#${newWidgetID}`).after(response)
-                loadOverlayFunctions()
+            // $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
+            //     $(`#${newWidgetID}`).after(response)
+            //     loadOverlayFunctions()
+            // })
+
+            $.get(`${basePath}/${editSectionOverlay}`, function(response) {
+                $(`#${newWidgetID}`).before(response)
+                loadSectionMenuOverlay()
+                loadEditSection()
             })
 
             $("[data-background]").each(function () {
@@ -292,9 +316,15 @@ function loadAddCountdownWidget() {
             $(`#${currentSectionID}`).empty().append(`<div id="${newWidgetID}"></div>`)
             $(`#${newWidgetID}`).append(response)
 
-            $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
-                $(`#${newWidgetID}`).after(response)
-                loadOverlayFunctions()
+            // $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
+            //     $(`#${newWidgetID}`).after(response)
+            //     loadOverlayFunctions()
+            // })
+
+            $.get(`${basePath}/${editSectionOverlay}`, function(response) {
+                $(`#${newWidgetID}`).before(response)
+                loadSectionMenuOverlay()
+                loadEditSection()
             })
 
             $("[data-background]").each(function () {
@@ -336,9 +366,15 @@ function loadAddCtaWidget() {
             $(`#${currentSectionID}`).empty().append(`<div id="${newWidgetID}"></div>`)
             $(`#${newWidgetID}`).append(response)
 
-            $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
-                $(`#${newWidgetID}`).after(response)
-                loadOverlayFunctions()
+            // $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
+            //     $(`#${newWidgetID}`).after(response)
+            //     loadOverlayFunctions()
+            // })
+
+            $.get(`${basePath}/${editSectionOverlay}`, function(response) {
+                $(`#${newWidgetID}`).before(response)
+                loadSectionMenuOverlay()
+                loadEditSection()
             })
 
             $("[data-background]").each(function () {
@@ -381,9 +417,15 @@ function loadAddServicesWidget() {
             $(`#${currentSectionID}`).empty().append(`<div id="${newWidgetID}"></div>`)
             $(`#${newWidgetID}`).append(response)
 
-            $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
-                $(`#${newWidgetID}`).after(response)
-                loadOverlayFunctions()
+            // $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
+            //     $(`#${newWidgetID}`).after(response)
+            //     loadOverlayFunctions()
+            // })
+
+            $.get(`${basePath}/${editSectionOverlay}`, function(response) {
+                $(`#${newWidgetID}`).before(response)
+                loadSectionMenuOverlay()
+                loadEditSection()
             })
 
             $("[data-background]").each(function () {
@@ -425,9 +467,15 @@ function loadAddTestimonialWidget() {
             $(`#${currentSectionID}`).empty().append(`<div id="${newWidgetID}"></div>`)
             $(`#${newWidgetID}`).append(response)
 
-            $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
-                $(`#${newWidgetID}`).after(response)
-                loadOverlayFunctions()
+            // $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
+            //     $(`#${newWidgetID}`).after(response)
+            //     loadOverlayFunctions()
+            // })
+
+            $.get(`${basePath}/${editSectionOverlay}`, function(response) {
+                $(`#${newWidgetID}`).before(response)
+                loadSectionMenuOverlay()
+                loadEditSection()
             })
 
             $("[data-background]").each(function () {
