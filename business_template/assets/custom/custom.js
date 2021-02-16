@@ -25,7 +25,8 @@
 // const editCategoriesWidgetModal = "editCategoriesWidget_modal.php"
 // const editSliderWidgetModal = "editSliderWidget_modal.php"
 
-$(document).ready( () => {    
+$(document).ready( () => {
+    loadEditNavbar()
     loadAddSection("btnAddSection_main", "section_main_addSection")
     loadEditSection()
     loadOverlayFunctions()

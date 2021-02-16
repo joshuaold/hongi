@@ -1,5 +1,6 @@
 <?php
     $pageData = json_decode(file_get_contents("business_template/data.json"));
+    $navbarHeader = $pageData->navbar_header;
     $pageSections = $pageData->page_sections;
 ?>
 
@@ -9,6 +10,7 @@
 	<?php include "business_template/tags/headTags.php"; ?>    
     <script>
         var pageData = JSON.parse(<?php echo json_encode(file_get_contents("business_template/data.json")); ?>)
+        var navbarHeader = pageData.navbar_header
         var pageSections = pageData.page_sections
     </script>
 </head>
@@ -25,9 +27,9 @@
         <div id="section_header">
             <header>
                 <div class="header-area">
-                    <div class="main-header optionalSectionWrapper">
+                    <div id="section_header_2" class="main-header optionalSectionWrapper">
                         <!-- <?php include "business_template/widgets/sociallinks_widget.php"; ?> -->
-                        <?php include "business_template/editSectionOverlay.php"; ?>
+                        <?php include "business_template/editNavbarHeaderOverlay.php"; ?>
                         <?php include "business_template/widgets/navbar_widget.php"; ?>
                     </div>
                 </div>
