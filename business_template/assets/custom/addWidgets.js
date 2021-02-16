@@ -46,10 +46,17 @@ function loadAddSliderWidget() {
             
             loadSliderSlider(newSliderID)            
 
-            $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
-                $(`#${newWidgetID}`).after(response)
-                loadOverlayFunctions()
+            // $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {
+            //     $(`#${newWidgetID}`).after(response)
+            //     loadOverlayFunctions()
+            // })
+
+            $.get(`${basePath}/${editSectionOverlay}`, function(response) {
+                $(`#${newWidgetID}`).before(response)
+                loadSectionMenuOverlay()
+                loadEditSection()
             })
+
 
             $("[data-background]").each(function () {
                 $(this).css("background-image", "url(" + $(this).attr("data-background") + ")")

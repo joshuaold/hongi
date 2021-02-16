@@ -4,7 +4,7 @@ function loadEditSection() {
         let widgetID = $(`#${sectionID}`).find("div[id]").attr("id")
         
         // dom manipulation
-        $.get(`${basePath}/sectionMenuOverlay`, function(response) {                        
+        $.get(`${basePath}/${sectionMenuOverlay}`, function(response) {                        
             $(`#${widgetID}`).after(response)
             loadOverlayFunctions()
         })       

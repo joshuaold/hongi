@@ -1,6 +1,7 @@
 const basePath = "business_template"
 
 const sectionMenuOverlay = "sectionMenuOverlay.php"
+const editSectionOverlay = "editSectionOverlay.php"
 
 const widgetsPath = "widgets"
 const widgetListWidget = "widgetList_widget.php"

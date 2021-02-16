@@ -25,8 +25,9 @@
         <div id="section_header">
             <header>
                 <div class="header-area">
-                    <div class="main-header ">
-                        <?php include "business_template/widgets/sociallinks_widget.php"; ?>
+                    <div class="main-header optionalSectionWrapper">
+                        <!-- <?php include "business_template/widgets/sociallinks_widget.php"; ?> -->
+                        <?php include "business_template/editSectionOverlay.php"; ?>
                         <?php include "business_template/widgets/navbar_widget.php"; ?>
                     </div>
                 </div>
